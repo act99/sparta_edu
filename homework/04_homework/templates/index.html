@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <title>원페이지쇼핑몰</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Do Hyeon', sans-serif;
+        }
+
+        .myitem {
+            width: 500px;
+            height: 300px;
+
+            background-image: url("https://t1.daumcdn.net/liveboard/nts/5bcccfbd33da4865817b9c606b6b852e.JPG");
+            background-position: center;
+            background-size: cover;
+        }
+
+        .price {
+            font-size: 16px;
+        }
+
+        .desc {
+            width: 500px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .order-box {
+            width: 500px;
+            margin-bottom: 40px;
+        }
+
+        .mybtn {
+            width: 100px;
+            margin: auto;
+            display: block;
+        }
+
+        .wrap {
+            margin: auto;
+            width: 500px;
+        }
+
+        .rate {
+            color: blue;
+        }
+    </style>
+    <script>
+
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "https://api.manana.kr/exchange/rate.json",
+                data: {},
+                success: function (response) {
+                    let nowRate = response[1]['rate'];
+                    $('#rate-box').text(nowRate);
+                }
+            })
+            order_listing();
+        });
+
+        function order_listing() {
+            // 주문목록 보기 API 연결
+            $.ajax({
+                type: "GET",
+                url: "/order",
+                data: {},
+                success: function (response) {
+                    let orders = response["all_orders"]
+                    console.log(orders)
+                    for(let i=0; i<orders.length; i++){
+                        let name = orders[i]["name"];
+                        let phone = orders[i]["phone"];
+                        let address = orders[i]["address"];
+                        let count = orders[i]["count"];
+                        let temp_html = `<tr>
+                                            <th scope="row">${name}</th>
+                                            <td>${count}</td>
+                                            <td>${address}</td>
+                                            <td>${phone}</td>
+                                        </tr>`
+                        $("#table_body").append(temp_html)
+                    }
+                }
+            })
+        }
+
+        function order() {
+            let name = $("#order-name").val()
+            let count = $("#order-count").val()
+            let address = $("#order-address").val()
+            let phone = $("#order-phone").val()
+            // 주문하기 API 연결
+            $.ajax({
+                type: "POST",
+                url: "/order",
+                data: {name_give: name, count_give: count, address_give: address, phone_give: phone},
+                success: function (response) { // 성공하면
+                    window.location.reload();
+                    alert(response["msg"]);
+                }
+            })
+        }
+    </script>
+</head>
+
+<body>
+<div class="wrap">
+    <div class="myitem"></div>
+    <div class="desc">
+        <h1>양초를 팝니다 <span class="price">가격:3,000원/개</span></h1>
+        <p>이 양초는 특별한 힘을 가지고 있습니다. 하나 두 개 켜 놓으면 또 다른 촛불을 찾을 수 있죠!</p>
+
+        <p class="rate">달러-원 환율: <span id="rate-box">1,000</span></p>
+    </div>
+    <div class="order-box">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="name">주문자이름</span>
+            </div>
+            <input id="order-name" type="text" class="form-control" aria-label="Default"
+                   aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">수량</label>
+            </div>
+            <select id="order-count" class="custom-select">
+                <option selected>-- 수량을 선택하세요 --</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="address">주소</span>
+            </div>
+            <input id="order-address" type="text" class="form-control" aria-label="Default"
+                   aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="phone">전화번호</span>
+            </div>
+            <input id="order-phone" type="text" class="form-control" aria-label="Default"
+                   aria-describedby="inputGroup-sizing-default">
+        </div>
+        <button onclick="order()" type="button" class="btn btn-primary mybtn">주문하기</button>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">이름</th>
+            <th scope="col">수량</th>
+            <th scope="col">주소</th>
+            <th scope="col">전화번호</th>
+        </tr>
+        </thead>
+        <tbody id="table_body">
+
+        </tbody>
+    </table>
+</div>
+</body>
+
+</html>

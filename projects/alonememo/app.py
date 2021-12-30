@@ -17,9 +17,8 @@ def home():
 
 @app.route('/memo', methods=['GET'])
 def listing():
-    sample_receive = request.args.get('sample_give')
-    print(sample_receive)
-    return jsonify({'msg':'GET 연결되었습니다!'})
+    articles = list(db.articles.find({}, {"_id":False}))
+    return jsonify({"all_articles":articles})
 
 
 
