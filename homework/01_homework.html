@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Stylish&amp;display=swap" rel="stylesheet">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <title>스파르타코딩클럽 | 부트스트랩 연습하기</title>
+    <style>
+        * {
+            font-family: 'Stylish', sans-serif;
+        }
+
+        .wrap {
+            width: 600px;
+            margin: 100px auto 50px auto;
+
+        }
+
+        .imageClass {
+            background-color: green;
+            width: 600px;
+            height: 350px;
+            margin-bottom: 30px;
+            background-image: url("https://img.etnews.com/news/article/2021/05/26/cms_temp_article_26155823990264.jpg");
+            background-size: cover;
+            background-position: center;
+
+        }
+
+        .spanText {
+            font-size: 15px;
+
+        }
+
+        .h5Text {
+            font-size: 18px;
+        }
+        .buttonCenter {
+            margin: auto;
+            display: block;
+        }
+        .dropdown-width {
+            width: 549px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="wrap">
+    <div class="imageClass"></div>
+    <div><h3>맥북 팝니다 <span class="spanText">가격: 2,350,000원/개</span></h3><h5 class="h5Text">맥북 2021 신형 팝니다. A1칩의 빠른 속도를
+        체감해보세요. 케이스 드립니다. 마우스 중고지만 드리겠습니다. 문자주세요</h5></div>
+    <div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" >주문자 이름</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">수량</span>
+            </div>
+
+
+    <button class="btn btn-outline-secondary dropdown-toggle dropdown-width" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--수량을 선택하세요. --</button>
+    <div class="dropdown-menu dropdown-width">
+      <a class="dropdown-item" href="#">1개</a>
+      <a class="dropdown-item" href="#">2개</a>
+        <a class="dropdown-item" href="#">3개</a>
+        <a class="dropdown-item" href="#">4개</a>
+      <a class="dropdown-item" href="#">10개</a>
+
+  </div>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">주소</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">전화번호</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
+
+    </div>
+    <button type="button" class="btn btn-primary buttonCenter">주문하기</button>
+</div>
+</body>
+
+</html>
